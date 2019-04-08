@@ -3,16 +3,7 @@ import faunadb, { query as q } from "faunadb"
 
 var client = new faunadb.Client({ secret: process.env.fauna });
 
-const { If, Paginate, Match, Map, Ref, Get, Index, Delete, CreateDatabase, CreateKey, Database, CreateIndex, Class, Create,  Update, CreateClass, Lambda, Var } = q
-
-// First createindex
-// console.log({newIndex})
-// let index = CreateIndex({
-//   name: "all_logs",
-//   source: Class("Logs")
-// })
-// const newIndex = client.query(index)
-// Paginate(input, [ts], [after], [before], [size], [events], [sources])
+const { Paginate, Match, Map, Ref, Get, Index, Delete, Class, Create,  Update, Lambda, Var } = q
 
 const typeDefs = gql`
   type Log {
@@ -32,11 +23,6 @@ const typeDefs = gql`
   }
 `;
 
-
-// C ✅
-// R ✅
-// U ✅
-// D ✅
 
 const resolvers = {
   Query: {
@@ -73,7 +59,6 @@ const resolvers = {
         { data: { title } })
 
       const { data, ref, ts } = await client.query(updateQuery)
-      console.log({data, ref, ts})
 
       return ({ ...data, id: ref.id })
     },
@@ -81,7 +66,6 @@ const resolvers = {
       let deleteQuery = Delete(Ref(Class("Logs"), id))
 
       const { data, ref, ts } = await client.query(deleteQuery)
-      console.log({data, ref, ts})
 
       return ({ ...data, id: ref.id })
     }

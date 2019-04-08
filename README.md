@@ -1,4 +1,11 @@
-# Apollo Server
+## Prerequit :
+
+- Create a database with a key you put on now.json 👢
+- Create a Logs class
+
+
+
+# Fork of apollo Server with fauna on lambda
 
 This example offers a pre-setup project for Apollo Server that allows you to get up and running in no time!
 
@@ -10,7 +17,10 @@ This Apollo Server example features the [`now.json` configuration file](https://
 {
   "version": 2,
   "builds": [{ "src": "index.js", "use": "@now/node-server" }],
-  "routes": [{ "src": "/.*", "dest": "index.js" }]
+  "routes": [{ "src": "/.*", "dest": "index.js" }],
+  "env": {
+    "fauna": "XXXX"
+  }
 }
 ```
 _now.json_
@@ -19,12 +29,23 @@ _now.json_
 - The [`routes` property](/docs/v2/deployments/configuration#routes) allows Now to route your deployment either by using a source and destination, or by way of a source, status, and headers.
 - The [`builds` property](https://zeit.co/docs/v2/deployments/builds) allows Now to use a [builder](https://zeit.co/docs/v2/deployments/builders/overview/) with a specific source target.
 
+- the env
+
 The `@now/node-server` [builder](https://zeit.co/docs/v2/deployments/builders/overview) enables a Node.js server deployment.
 
 Deploy the app with Now.
 
 ```shell
 $ now
+```
+
+
+## To develop :
+
+download latest now cli and run
+
+```shell
+ now dev
 ```
 
 ## Resources
